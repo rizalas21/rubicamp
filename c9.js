@@ -25,30 +25,31 @@ function spiral(param1) {
         row++;
 
         
-        for(let i = rowEnd; i >= row; i--) {
+        for(let i = row; i <= rowEnd; i++) {
             kurung.push(arr[i][colEnd])
         }
         colEnd--;
 
-
+        if(row <= rowEnd)   
         for(let i = colEnd; i >= col; i--) {
-            kurung.push(arr[i][rowEnd])
+            kurung.push(arr[rowEnd][i])
         }
         rowEnd--;
 
-
-        for(let i = row; i <= rowEnd; i++) {
-            kurung.push(arr[col][i])
-        }
+        if(col <= colEnd) {
+            for(let i = rowEnd; i >= row; i--) {
+            kurung.push(arr[i][col])
+            }
         col++;
+        }
     }
     return kurung;
 }
 
 
 console.log(spiral(5))
-console.log(spiral(6))
-console.log(spiral(7))
+// console.log(spiral(6))
+// console.log(spiral(7))
 
 /* result [0,1,2,3,4,9,14,19,24,23,22,21,20,15,10,5,6,7,8,13,18,17,16,11,12]
 [0,1,2,3,4,5,11,17,23,29,35,34,33,32,31,30,24,18,12,6,7,8,9,10,16,22,28,27,26,25,19,13,14,15,21,20]
