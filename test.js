@@ -1,9 +1,5 @@
 function sum() {
-let a = 0; 
-    for (let i = 0; i < arguments.length; i++) {
-        a += arguments[i];
-    }
-    return a;
+    return(Object.values(arguments).reduce((hasil,value) => hasil + value))
 }
 
 console.log(sum(1,2,7))
