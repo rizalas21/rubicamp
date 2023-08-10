@@ -1,23 +1,29 @@
 function romawi(n) {
-    let angkaRomawi;
-    switch (n) {
-        case 4:
-            angkaRomawi = 'IV'
-            break;
-        case 9:
-            angkaRomawi = 'IX'
-            break;
-        case 13:
-            angkaRomawi = 'XIII'
-            break;
-        case 1453:
-            angkaRomawi = 'MCDLIII'
-            break;
-        case 1646:
-            angkaRomawi = 'MDCXLVI'
-    }
-    return angkaRomawi;
+    const dictionary = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V : 5,
+        IV: 4,
+        I: 1
 }
+
+    let hasilRomawi = '';
+    for(const romawi in dictionary) {
+        while(n >= dictionary[romawi]) {
+            hasilRomawi += romawi;
+        }
+    }
+    return hasilRomawi;
+}
+
 
 console.log("Script Testing untuk Konversi Romawi\n");
 console.log("input | expected | result");
