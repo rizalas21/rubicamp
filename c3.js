@@ -1,4 +1,5 @@
 function romawi(n) {
+    let str = '';
     const dictionary = {
         M: 1000,
         CM: 900,
@@ -13,15 +14,14 @@ function romawi(n) {
         V : 5,
         IV: 4,
         I: 1
-}
-
-    let hasilRomawi = '';
-    for(const romawi in dictionary) {
-        while(n >= dictionary[romawi]) {
-            hasilRomawi += romawi;
-        }
     }
-    return hasilRomawi;
+   for(let romawi in dictionary) {
+        while(n >= dictionary[romawi]) {
+            str += romawi;
+            n -= dictionary[romawi]
+        }
+   }
+   return str;
 }
 
 
