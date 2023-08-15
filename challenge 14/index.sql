@@ -6,7 +6,7 @@ CREATE TABLE Jurusan(
 INSERT INTO Jurusan(ID_Jurusan, NAMA_Jurusan) VALUES
 ('222', 'Ilmu Komputer'),
 ('223', 'Ilmu Teknologi'),
-('224', 'Infotmatika'),
+('224', 'Informatika'),
 ('225', 'Data Analyst');
 
 CREATE TABLE Mata_Kuliah(
@@ -45,14 +45,14 @@ CREATE TABLE Mahasiswa(
 );
 
 INSERT INTO Mahasiswa(NIM, NAMA, ALAMAT, JURUSAN) VALUES
-('20231', 'Rizal Sudrajat', 'Sumedang', 'Ilmu Teknologi'),
-('20232', 'Rizki Hidayatulloh', 'Tasikmalaya', 'Ilmu Komputer'),
-('20233', 'Muhammad Ramdani', 'Garut', 'Ilmu Komputer'),
-('20234', 'Ogi Rizki', 'Bandung', 'Data Analyst'),
-('20235', 'Oki Ramadani', 'Medan', 'Informatika'),
-('20236', 'Ahamad Adifta', 'Bogor', 'Statistik'),
-('20237', 'Kiki', 'Bandung', 'Ilmu Teknologi'),
-('20238', 'Lathif', 'Sumedang', 'Ilmu komputer');
+('20231', 'Rizal Sudrajat', 'Sumedang', '223'),
+('20232', 'Rizki Hidayatulloh', 'Tasikmalaya', '222'),
+('20233', 'Muhammad Ramdani', 'Garut', '222'),
+('20234', 'Ogi Rizki', 'Bandung', '225'),
+('20235', 'Oki Ramadani', 'Medan', '224'),
+('20236', 'Ahamad Adifta', 'Bogor', '224'),
+('20237', 'Kiki', 'Bandung', '223'),
+('20238', 'Lathif', 'Sumedang', '225');
 
 CREATE TABLE kontrak(
     NIP CHAR(4) NOT NULL,
@@ -62,8 +62,7 @@ CREATE TABLE kontrak(
     NILAI INT(2) NOT NULL,
     FOREIGN KEY(NIM) REFERENCES Mahasiswa(NIM),
     FOREIGN KEY(NIP) REFERENCES Dosen(NIP),
-    FOREIGN KEY(ID_MATKUL) REFERENCES Mata_Kuliah(ID_MATKUL),
-    FOREIGN KEY(SKS) REFERENCES Mata_Kuliah(SKS)
+    FOREIGN KEY(ID_MATKUL) REFERENCES Mata_Kuliah(ID_MATKUL)
 );
 
 INSERT INTO kontrak(NIP,  ID_MATKUL, NIM, SKS , NILAI) VALUES
