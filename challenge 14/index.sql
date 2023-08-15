@@ -1,12 +1,12 @@
 CREATE TABLE Jurusan(
-    ID_Jurusan CHAR(4) PRIMARY KEY NOT NULL,
-    NAMA_Jurusan CHAR(20) NOT NULL
+    ID_Jurusan VARCHAR(4) PRIMARY KEY NOT NULL,
+    NAMA_Jurusan VARCHAR(20) NOT NULL
 );
 
 INSERT INTO Jurusan(ID_Jurusan, NAMA_Jurusan) VALUES
 ('222', 'Ilmu Komputer'),
 ('223', 'Ilmu Teknologi'),
-('224', 'Ilmu Infotmatika'),
+('224', 'Infotmatika'),
 ('225', 'Data Analyst');
 
 CREATE TABLE Mata_Kuliah(
@@ -34,45 +34,43 @@ INSERT INTO Dosen(NIP, NAMA) VALUES
 ('3303', 'Pepen Sudrajat'),
 ('3304', 'Rubi Henjaya'),
 ('3305', 'Reky Senjaya'),
-('3306', 'Yamin Pedas')
+('3306', 'Yamin Pedas');
 
 CREATE TABLE Mahasiswa(
     NIM CHAR(5) PRIMARY KEY NOT NULL,
     NAMA VARCHAR(25) NOT NULL,
-    ALAMAT VAR CHAR(30) NOT NULL,
-    JURUSAN CHAR(20) NOT NULL,
+    ALAMAT VARCHAR(30) NOT NULL,
+    JURUSAN VARCHAR(20) NOT NULL,
     FOREIGN KEY(JURUSAN) REFERENCES Jurusan(ID_Jurusan)
 );
 
 INSERT INTO Mahasiswa(NIM, NAMA, ALAMAT, JURUSAN) VALUES
-('20231', 'Rizal Sudrajat', 'Sumedang')
-('20232', 'Rizki Hidayatulloh', 'Tasikmalaya')
-('20233', 'Muhammad Ramdani','Garut')
-('20234', 'Ogi Rizki', 'Bandung')
-('20235', 'Oki Ramadani', 'Medan')
-('20236', 'Ahamad Adifta', 'Bogor')
-('20237', 'Kiki', 'Bandung')
-('20238', 'Lathif', 'Sumedang')
+('20231', 'Rizal Sudrajat', 'Sumedang', 'Ilmu Teknologi'),
+('20232', 'Rizki Hidayatulloh', 'Tasikmalaya', 'Ilmu Komputer'),
+('20233', 'Muhammad Ramdani', 'Garut', 'Ilmu Komputer'),
+('20234', 'Ogi Rizki', 'Bandung', 'Data Analyst'),
+('20235', 'Oki Ramadani', 'Medan', 'Informatika'),
+('20236', 'Ahamad Adifta', 'Bogor', 'Statistik'),
+('20237', 'Kiki', 'Bandung', 'Ilmu Teknologi'),
+('20238', 'Lathif', 'Sumedang', 'Ilmu komputer');
 
 CREATE TABLE kontrak(
     NIP CHAR(4) NOT NULL,
     ID_MATKUL CHAR(5) NOT NULL,
     NIM CHAR(5) NOT NULL,
-    ID_Jurusan CHAR(4) NOT NULL,
-    SKS CHAR(3) NOT NULL,
+    SKS VARCHAR(3) NOT NULL,
     NILAI INT(2) NOT NULL,
     FOREIGN KEY(NIM) REFERENCES Mahasiswa(NIM),
-    FOREIGN KEY(ID_Jurusan) REFERENCES Jurusan(ID_Jurusan),
     FOREIGN KEY(NIP) REFERENCES Dosen(NIP),
     FOREIGN KEY(ID_MATKUL) REFERENCES Mata_Kuliah(ID_MATKUL),
     FOREIGN KEY(SKS) REFERENCES Mata_Kuliah(SKS)
 );
 
-INSERT INTO kontrak(NIP,  ID_MATKUL, NIM, ID_Jurusan, SKS , NILAI) VALUES
-('3301', '20001', '20231', '223', 5, 90),
-('3302', '20002', '20231', '223', 4, 85),
-('3303', '20003', '20232', '221', 3, 80),
-('3305', '20005', '20235', '222', 6, 90);
+INSERT INTO kontrak(NIP,  ID_MATKUL, NIM, SKS , NILAI) VALUES
+('3301', '20001', '20231', 5, 90),
+('3302', '20002', '20231', 4, 85),
+('3303', '20003', '20232', 3, 80),
+('3305', '20005', '20235', 6, 90);
 
 
 SELECT * FROM kontrak;
