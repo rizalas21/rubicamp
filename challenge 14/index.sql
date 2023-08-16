@@ -1,3 +1,9 @@
+-- .schema (nama_tabel);
+-- .headers on (menampilkan header)
+-- .mode. column (merapihkan kolom)
+-- SELECT * FROM (nama_tabel); (menampilkan tabel tertentu)
+-- DROP TABLE (nama tabel); (menghapus tabel)
+
 CREATE TABLE Jurusan(
     ID_Jurusan VARCHAR(4) PRIMARY KEY NOT NULL,
     NAMA_Jurusan VARCHAR(20) NOT NULL
@@ -10,7 +16,7 @@ INSERT INTO Jurusan(ID_Jurusan, NAMA_Jurusan) VALUES
 ('225', 'Data Analyst');
 
 CREATE TABLE Mata_Kuliah(
-    ID_MATKUL CHAR(5) PRIMARY KEY NOT NULL,
+     ID_MATKUL CHAR(5) PRIMARY KEY NOT NULL,
     NAMA_MATKUL VARCHAR(25) NOT NULL,
     SKS INT(3) NOT NULL
 );
@@ -58,18 +64,17 @@ CREATE TABLE kontrak(
     NIP CHAR(4) NOT NULL,
     ID_MATKUL CHAR(5) NOT NULL,
     NIM CHAR(5) NOT NULL,
-    SKS VARCHAR(3) NOT NULL,
     NILAI INT(2) NOT NULL,
     FOREIGN KEY(NIM) REFERENCES Mahasiswa(NIM),
     FOREIGN KEY(NIP) REFERENCES Dosen(NIP),
     FOREIGN KEY(ID_MATKUL) REFERENCES Mata_Kuliah(ID_MATKUL)
 );
 
-INSERT INTO kontrak(NIP,  ID_MATKUL, NIM, SKS , NILAI) VALUES
-('3301', '20001', '20231', 3, 90),
-('3302', '20002', '20231', 2, 85),
-('3303', '20003', '20232', 3, 80),
-('3305', '20005', '20235', 4, 90);
+INSERT INTO kontrak(NIP,  ID_MATKUL, NIM, NILAI) VALUES
+('3301', '20001', '20231', 90),
+('3302', '20002', '20231', 85),
+('3303', '20003', '20232', 80),
+('3305', '20005', '20235', 90);
 
 
 SELECT * FROM kontrak;
