@@ -1,13 +1,16 @@
-import readline from 'readline'
 import JurusanController from './controllers/JurusanController.js'
+import { rl } from './views/JurusanViews.js'
 
-export const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
+export function garis() {
+    let line = ''
+    for (let i = 0; i < 100; i++) line += '='
+    return console.log(line)
+}
 
 
-console.log(`
+export function menuUtama() {
+    garis()
+    console.log(`
 silahkan pilih menu dibawah ini:
 [1] Mahasiswa
 [2] Jurusan
@@ -16,34 +19,40 @@ silahkan pilih menu dibawah ini:
 [5] Kontrak
 [6] Keluar
 `)
+    garis()
+    
+    rl.question('masukkan salah satu no. dari opsi diatas : ', (answer) => {
+        switch (answer) {
+            case '1':
+                console.log('masuk Mahasiswa menu')
+                break;
 
-rl.question('masukkan salah satu no. dari opsi diatas : ', (answer) => {
-    switch (answer) {
-        case '1':
-            console.log('masuk Mahasiswa menu')
-            break;
+            case '2':
+                JurusanController.menu()
+                break;
 
-        case '2':
-            JurusanController.menu()
-            break;
+            case '3':
+                console.log('masuk Dosen menu')
+                break;
 
-        case '3':
-            console.log('masuk Dosen menu')
-            break;
+            case '4':
+                console.log('masuk Mata Kuliah menu')
+                break;
 
-        case '4':
-            console.log('masuk Mata Kuliah menu')
-            break;
+            case '5':
+                console.log('masuk Kontrak menu')
+                break;
 
-        case '5':
-            console.log('masuk Kontrak menu')
-            break;
+            case '6':
+                console.log('Keluar')
+                process.exit(0)
 
-        case '6':
-        console.log('Keluar')
-        process.exit(0)
+            default:
+                console.log('anda salah memasukkan opsi, silahkan coba lagi!')
+                menuUtama()
+                break;
+        }
+    })
+}
 
-        default:
-            break;
-    }
-})
+menuUtama()
