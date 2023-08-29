@@ -1,5 +1,6 @@
 import MahasiswaController from './controllers/MahasiswaController.js'
 import JurusanController from './controllers/JurusanController.js'
+import MataKuliahController from './controllers/MataKuliahController.js'
 import { rl } from './connect.js'
 import DosenController from './controllers/DosenController.js'
 
@@ -38,7 +39,7 @@ silahkan pilih menu dibawah ini:
                 break;
 
             case '4':
-                console.log('masuk Mata Kuliah menu')
+                MataKuliahController.menu()
                 break;
 
             case '5':

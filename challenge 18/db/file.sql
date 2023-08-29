@@ -25,3 +25,13 @@ CREATE TABLE dosen(
 
 INSERT INTO dosen(nip, nama) VALUES
 ('DS001', 'Ujang');
+
+
+CREATE TABLE mata_kuliah(
+    id_mk CHAR(5) PRIMARY KEY NOT NULL,
+    nama_mk VARCHAR(100) NOT NULL,
+    sks INT(2) NOT NULL
+);
+
+INSERT INTO mata_kuliah VALUES
+('MK001', 'Data Mining', 4),
