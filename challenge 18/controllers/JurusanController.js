@@ -1,8 +1,9 @@
 //controllers untuk kontrol
 import Jurusan from "../models/Jurusan.js"
 import { menuUtama } from '../university.js' //rl pindah ke views JurusanViews.js
-import { showTable, rl } from "../views/JurusanViews.js"
+import { findResult, showTable } from "../views/JurusanViews.js"
 import { garis } from '../university.js'
+import { rl } from '../connect.js'
 
 export default class JurusanController {
 
@@ -57,9 +58,9 @@ silahkan pilih opsi dibawah ini :
 
     static cari() {
         rl.question('Masukkan id Jurusan Disini : ', async(kode) => {
-            const cari = await Jurusan.cariId(kode);
-            if(cari) {
-                showTable([cari])
+            const jurusan = await Jurusan.cariId(kode);
+            if(jurusan) {
+                findResult(jurusan)
                 JurusanController.menu()
             } else {
                 console.log(`Jurusan dengan id ${kode}, tidak terdaftar`)

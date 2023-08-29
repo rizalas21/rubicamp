@@ -1,8 +1,7 @@
 //views untuk tampilan
-import readline from 'readline'
+import { garis } from '../university.js';
 import Table from 'cli-table'
-
-export function showTable(data = []) {
+export function showTable(data) {
     var table = new Table({
         head: ['ID Jurusan', 'Nama Jurusan']
         , colWidths: [20, 80]
@@ -25,7 +24,3 @@ Nama Jurusan : ${data.nama_jurusan}
 `)
 };
 
-export const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})

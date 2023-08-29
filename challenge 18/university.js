@@ -1,5 +1,6 @@
+import MahasiswaController from './controllers/MahasiswaController.js'
 import JurusanController from './controllers/JurusanController.js'
-import { rl } from './views/JurusanViews.js'
+import { rl } from './connect.js'
 
 export function garis() {
     let line = ''
@@ -18,13 +19,13 @@ silahkan pilih menu dibawah ini:
 [4] Mata Kuliah
 [5] Kontrak
 [6] Keluar
-`)
+`)  
     garis()
     
     rl.question('masukkan salah satu no. dari opsi diatas : ', (answer) => {
         switch (answer) {
             case '1':
-                console.log('masuk Mahasiswa menu')
+                MahasiswaController.menu()
                 break;
 
             case '2':
