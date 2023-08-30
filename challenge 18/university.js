@@ -1,8 +1,9 @@
 import MahasiswaController from './controllers/MahasiswaController.js'
 import JurusanController from './controllers/JurusanController.js'
 import MataKuliahController from './controllers/MataKuliahController.js'
-import { rl } from './connect.js'
 import DosenController from './controllers/DosenController.js'
+import KontrakController from './controllers/KontrakController.js'
+import { rl } from './connect.js'
 
 export function garis() {
     let line = ''
@@ -43,7 +44,7 @@ silahkan pilih menu dibawah ini:
                 break;
 
             case '5':
-                console.log('masuk Kontrak menu')
+                KontrakController.menu()
                 break;
 
             case '6':

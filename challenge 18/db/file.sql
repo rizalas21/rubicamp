@@ -20,10 +20,10 @@
 
 CREATE TABLE dosen(
     nip CHAR(5) PRIMARY KEY NOT NULL,
-    nama VARCHAR(30) NOT NULL
+    nama_dosen VARCHAR(30) NOT NULL
 );
 
-INSERT INTO dosen(nip, nama) VALUES
+INSERT INTO dosen(nip, nama_dosen) VALUES
 ('DS001', 'Ujang');
 
 
@@ -35,3 +35,19 @@ CREATE TABLE mata_kuliah(
 
 INSERT INTO mata_kuliah VALUES
 ('MK001', 'Data Mining', 4),
+
+
+-- nim, nip, nilai, id_mk,
+CREATE TABLE kontrak(
+        id_kontrak INTEGER PRIMARY KEY AUTOINCREMENT,
+        nim CHAR(10) NOT NULL,
+        nip CHAR(5) NOT NULL,
+        id_mk CHAR(5) NOT NULL,
+        nilai CHAR(2) DEFAULT "TT",
+        FOREIGN KEY(nim) REFERENCES mahasiswa(nim),
+        FOREIGN KEY(nip) REFERENCES Dosen(nip),
+        FOREIGN KEY(id_mk) REFERENCES mata_kuliah(id_mk)
+    );
+
+    INSERT INTO kontrak(nim, nip, id_mk, nilai) VALUES
+    ('2022070001', 'DS001', 'MK001', 'A');
