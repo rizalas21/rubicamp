@@ -78,7 +78,6 @@ silahkan pilih opsi dibawah ini :
                     } else {
                         Jurusan.create(kode, nama, function(){
                             console.log('Jurusan telah ditambahkan')
-                            JurusanController.daftar()
                             JurusanController.menu()
                         })
                     }
@@ -92,7 +91,7 @@ silahkan pilih opsi dibawah ini :
                 if(await Jurusan.cariId(kode)) {
                     Jurusan.delete(kode)
                     console.log('Jurusan berhasil dihapus')
-                    JurusanController.daftar()
+                    JurusanController.menu(``)
                 } else {
                     Jurusan.delete(kode, function(){
                         console.log('Jurusan gagal dihapus, silahkan coba lagi!')

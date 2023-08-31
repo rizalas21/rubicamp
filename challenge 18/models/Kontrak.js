@@ -8,13 +8,44 @@ export default class Kontrak {
     }
 
 
-    static create(nim, nip, id_mk, next) {  //create //prototype //cara pakainya harus pakai new dulu
-        db.run('INSERT INTO kontrak (nim, nip, id_mk) VALUES (?, ?, ?)', 
-        [nim, nip, id_mk], (err) => {
+    static create(nim, id_mk, nip, next) {  //create //prototype //cara pakainya harus pakai new dulu
+        db.run('INSERT INTO kontrak (nim, id_mk, nip) VALUES (?, ?, ?)',
+            [nim, id_mk, nip], (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                next()
+            })
+    }
+
+
+    static kumplit(next) {
+        db.all('SELECT * from mahasiswa LEFT JOIN jurusan USING(id_jurusan)', (err, rows) => {
             if (err) {
-                console.log(err);
+                console.log(err)
+            } else {
+                next(rows)
             }
-            next()
+        })
+    }
+
+    static matkul(next) {
+        db.all('SELECT * FROM mata_kuliah', (err, rows) => {
+            if (err) {
+                console.log(err)
+            } else {
+                next(rows)
+            }
+        })
+    }
+
+    static dosen(next) {
+        db.all('SELECT * FROM dosen', (err, rows) => {
+            if (err) {
+                console.log(err)
+            } else {
+                next(rows)
+            }
         })
     }
 
@@ -38,6 +69,26 @@ export default class Kontrak {
         })
     }
 
+    static cariKontrak(id_kontrak) {
+        return new Promise(function (resolve, reject) {
+            db.get('SELECT * FROM kontrak WHERE id_kontrak = ?', [id_kontrak], (err, data) => {
+                if (err) reject(err)
+                else resolve(data)
+            })
+        })
+    }
+
+    static cariKontrak(nilai) {
+        return new Promise(function (resolve, reject) {
+            db.get('SELECT * FROM kontrak WHERE nilai = ?', [nilai], (err, data) => {
+                if (err) reject(err)
+                else resolve(data)
+            })
+        })
+    }
+
+
+
     static cariNim(nim) {
         return new Promise(function (resolve, reject) {
             db.all('SELECT * FROM kontrak WHERE nim = ?', [nim], (err, data) => {
@@ -59,12 +110,30 @@ export default class Kontrak {
         })
     }
 
+
     static update(nilai, id_kontrak, nim) {
         return new Promise(function (resolve, reject) {
             db.run('UPDATE kontrak SET nilai = ? WHERE id_kontrak = ? AND nim = ?', [nilai, id_kontrak, nim], (err, data) => {
-                if(err) reject(err)
+                if (err) reject(err)
                 else resolve(data)
             })
         })
     }
+
+    static cariData(nim, next) {
+        db.all('SELECT kontrak.id_kontrak, mata_kuliah.nama_mk, kontrak.nilai FROM kontrak LEFT JOIN mata_kuliah USING (id_mk) WHERE kontrak.nim = ?', [nim], (err, data) => {
+            if (err) console.log(err)
+            else next(data)
+        })
+    }
+
+    static tampilData(nim) {
+        return new Promise(function (resolve, reject) {
+            db.all('SELECT kontrak.id_kontrak, mata_kuliah.nama_mk, kontrak.nilai FROM kontrak LEFT JOIN mata_kuliah USING (id_mk)', [nim], (err, data) => {
+                if (err) reject(err)
+                else resolve(data)
+            })
+        })
+    }
+
 }

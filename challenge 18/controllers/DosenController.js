@@ -69,13 +69,13 @@ silahkan pilih opsi dibawah ini :
     }
 
     static async tambah() {
-        rl.question('Masukkan NIP Dosen : ', async (kode) => {
+        rl.question('Masukkan NIP Dosen : ', async (nip) => {
             rl.question('Nama Dosen : ', async (nama) => {
-                if (await Dosen.cariId(kode)) {
+                if (await Dosen.cariId(nip)) {
                     console.log('\n Gagal menambahkan Dosen, Dosen telah terdaftar');
                     DosenController.menu()
                 } else {
-                    Dosen.create(kode, nama, function () {
+                    Dosen.create(nip, nama, function () {
                         console.log('Dosen telah ditambahkan')
                         DosenController.daftar()
                     })

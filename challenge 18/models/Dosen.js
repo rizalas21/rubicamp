@@ -7,7 +7,7 @@ export default class Dosen{
     }
 
     static create(kode, nama, next) {
-        db.run('INSERT INTO dosen(nip, nama) VALUES (?, ?)',
+        db.run('INSERT INTO dosen(nip, nama_dosen) VALUES (?, ?)',
          [kode, nama], (err) => {
             if(err) {
                 console.log(err)

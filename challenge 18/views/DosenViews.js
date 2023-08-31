@@ -3,13 +3,12 @@ import Table from "cli-table";
 
 export function dosenTable(data) {
     var table = new Table({
-        head: ['NIP', 'Nama'],
+        head: ['NIP', 'Nama Dosen'],
         colWidths: [20, 80]
     });
-
     data.forEach(dosen => {
         table.push(
-            [dosen.nip, dosen.nama]
+            [dosen.nip, dosen.nama_dosen]
         )
     });
 
@@ -21,6 +20,6 @@ export function findID(data) {
     console.log(`
 Detail Dosen Dengan NIP '${data.nip}'
 NIP          : ${data.nip}
-Nama dosen   : ${data.nama}
+Nama dosen   : ${data.nama_dosen}
 `)
 };

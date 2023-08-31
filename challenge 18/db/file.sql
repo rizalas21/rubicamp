@@ -1,3 +1,11 @@
+   CREATE TABLE login(
+    username VARCHAR(100) PRIMARY KEY NOT NULL,
+    pw VARCHAR (50) NOT NULL
+   );
+   
+    INSERT INTO login(username, pw) VALUES
+    ('Rizal', '12345');
+   
     CREATE TABLE jurusan(
     id_jurusan char(3) PRIMARY KEY NOT NULL,
     nama_jurusan VARCHAR (100) NOT NULL);

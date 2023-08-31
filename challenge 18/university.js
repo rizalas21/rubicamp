@@ -1,3 +1,4 @@
+import LoginController from './controllers/LoginController.js'
 import MahasiswaController from './controllers/MahasiswaController.js'
 import JurusanController from './controllers/JurusanController.js'
 import MataKuliahController from './controllers/MataKuliahController.js'
@@ -11,6 +12,10 @@ export function garis() {
     return console.log(line)
 }
 
+garis()
+console.log('Welcome to Universitas Pendidikan Indonesia \n Jl. Setiabudhi No.255')
+garis()
+LoginController.login()
 
 export function menuUtama() {
     garis()
@@ -58,5 +63,3 @@ silahkan pilih menu dibawah ini:
         }
     })
 }
-
-menuUtama()

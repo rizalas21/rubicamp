@@ -1,7 +1,7 @@
 //controllers untuk kontrol
 import Kontrak from "../models/Kontrak.js"
 import { menuUtama } from '../university.js' //rl pindah ke views JurusanViews.js
-import { kontrakTable, showTable } from "../views/KontrakViews.js"
+import { kontrakTable, showTable, tableDosen, tableMatkul, tablejoin, tablekumplit } from "../views/KontrakViews.js"
 import { garis } from '../university.js'
 import { rl } from '../connect.js'
 
@@ -61,54 +61,101 @@ silahkan pilih opsi dibawah ini :
     }
 
     static cari() {
-        rl.question('Masukkan NIM Mahasiswa : ', async (nim) => {
-            const kontrak = await Kontrak.cariNim(nim);
-            console.log(`Daftar Kontrak Mahasiswa Dengan NIM ${nim} adalah : `)
-            if (kontrak) {
-                kontrakTable(kontrak)
-                KontrakController.menu()
-            } else {
-                console.log(`Kontrak dengan NIM ${nim}, tidak terdaftar`)
-                KontrakController.menu()
-            }
+        Kontrak.kumplit(function (data) {
+            tablekumplit(data)
+            rl.question('Masukkan NIM Mahasiswa : ', async (nim) => {
+                const kontrak = await Kontrak.cariNim(nim);
+                console.log(`Daftar Kontrak Mahasiswa Dengan NIM ${nim} adalah : `)
+                if (kontrak) {
+                    kontrakTable(kontrak)
+                    KontrakController.menu()
+                } else {
+                    console.log(`Kontrak dengan NIM ${nim}, tidak terdaftar`)
+                    KontrakController.menu()
+                }
+            })
         })
+
     }
 
     static async tambah() {
-        rl.question('NIM Mahasiswa : ', async (nim) => {
-            rl.question('NIP Dosen : ', async (nip) => {
-                rl.question('ID Matkul : ', async (id_mk) => {
-                    if (await Kontrak.cariId(nim)) {
-                        Kontrak.create(nim, nip, id_mk, function () {
-                            console.log('Kontrak telah ditambahkan');
+        console.log('Lengkapi data di bawah ini : ')
+        Kontrak.kumplit(function (data) {
+            tablekumplit(data)
+            rl.question('masukkan NIM : ', async (nim) => {
+                Kontrak.matkul(function (data) {
+                    tableMatkul(data)
+                    rl.question('Masukkan Kode Mata Kuliah: ', async (id_mk) => {
+                        Kontrak.dosen(function (data) {
+                            tableDosen(data)
+                            rl.question('masukkan NIP Dosen : ', async (nip) => {
+                                if (await nim) {
+                                    Kontrak.create(nim, id_mk, nip, function () {
+                                        console.log('Kontrak telah ditambahkan');
+                                        Kontrak.findAll(function (data) {
+                                            showTable(data)
+                                            KontrakController.menu()
+                                        })
+                                    })
+                                } else {
+                                    console.log('\n Gagal menambahkan Kontrak, Kontrak telah terdaftar')
+                                    KontrakController.menu()
+                                }
+                            })
                         })
-                        KontrakController.daftar()
-                        KontrakController.menu()
-                    } else {
-                        console.log('\n Gagal menambahkan Kontrak, Kontrak telah terdaftar')
-                        KontrakController.menu()
-                    }
+                    })
                 })
+            })
+
+
+        })
+
+    }
+
+    static async hapus() {
+        Kontrak.findAll(function (data) {
+            showTable(data)
+            rl.question('masukkan ID Kontrak : ', async (kode) => {
+                if (await Kontrak.cariKontrak(kode)) {
+                    Kontrak.delete(kode)
+                    console.log('Kontrak berhasil dihapus')
+                    KontrakController.menu()
+                } else {
+                    console.log('Kontrak gagal dihapus, silahkan coba lagi!')
+                    KontrakController.menu()
+                }
             })
         })
     }
 
-    static async hapus() {
-        rl.question('masukkan NIM : ', async (kode) => {
-            if (await Kontrak.cariId(kode)) {
-                Kontrak.delete(kode)
-                console.log('Kontrak berhasil dihapus')
-                KontrakController.daftar()
-            } else {
-                Kontrak.delete(kode, function () {
-                    console.log('Mahasiswa gagal dihapus, silahkan coba lagi!')
-                    KontrakController.menu()
-                })
-            }
-        })
-    }
-
     static async update() {
-        rl.question()
+        Kontrak.findAll(function (data) {
+            showTable(data)
+            rl.question('Masukkan NIM mahasiswa : ', async (nim) => {
+                Kontrak.cariData(nim, function (data) {
+                    console.log(`Detail mahasiswa dengan NIM '${nim}' : `)
+                    tablejoin(data)
+                    garis()
+                    rl.question('Masukkan id yang akan dirubah nilainya : ', async (id_kontrak) => {
+                        garis()
+                        rl.question('Tulis nilai yang baru : ', async (nilai) => {
+                            garis()
+                            if (await Kontrak.cariKontrak(nilai)) {
+                                Kontrak.update(nilai, id_kontrak, nim)
+                                console.log('nilai telah diupdate')
+                                Kontrak.findAll(function (data) {
+                                    showTable(data)
+                                    KontrakController.menu()
+                                })
+                            } else {
+                                console.log('Gagal mengupdate nilai, Nilai sudah ada, Silahkan coba lagi!')
+                                KontrakController.menu()
+                            }
+                        })
+                    })
+                })
+            })
+
+        })
     }
 }
