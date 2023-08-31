@@ -12,10 +12,12 @@ export function garis() {
     return console.log(line)
 }
 
-garis()
-console.log('Welcome to Universitas Pendidikan Indonesia \n Jl. Setiabudhi No.255')
-garis()
-LoginController.login()
+export function mulai() {
+    garis()
+    console.log("Welcome To Uneversitas Indonesia\nJl. Setiabudi No. 255")
+    garis()
+    LoginController.login()
+}
 
 export function menuUtama() {
     garis()
@@ -53,8 +55,10 @@ silahkan pilih menu dibawah ini:
                 break;
 
             case '6':
-                console.log('Keluar')
-                process.exit(0)
+                garis()
+                console.log('Anda telah keluar')
+                mulai()
+                break;
 
             default:
                 console.log('anda salah memasukkan opsi, silahkan coba lagi!')
@@ -63,3 +67,5 @@ silahkan pilih menu dibawah ini:
         }
     })
 }
+
+mulai()

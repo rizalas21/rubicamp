@@ -71,16 +71,7 @@ export default class Kontrak {
 
     static cariKontrak(id_kontrak) {
         return new Promise(function (resolve, reject) {
-            db.get('SELECT * FROM kontrak WHERE id_kontrak = ?', [id_kontrak], (err, data) => {
-                if (err) reject(err)
-                else resolve(data)
-            })
-        })
-    }
-
-    static cariKontrak(nilai) {
-        return new Promise(function (resolve, reject) {
-            db.get('SELECT * FROM kontrak WHERE nilai = ?', [nilai], (err, data) => {
+            db.get('SELECT * FROM kontrak WHERE id_kontrak = ?', [id_kontrak], (err, data) => { 
                 if (err) reject(err)
                 else resolve(data)
             })
@@ -96,6 +87,15 @@ export default class Kontrak {
                 else resolve(data)
             })
         })
+    }
+
+    static cariNilai(nilai) {
+        return new Promise(function (resolve,reject) {
+            db.all('SELECT * FROM kontrak WHERE nilai = ?', [nilai], (err, data) => {
+                if(err) reject(err)
+                else resolve(data)
+            })
+        }) 
     }
 
     static delete(id_kontrak) {

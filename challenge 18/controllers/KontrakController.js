@@ -116,7 +116,8 @@ silahkan pilih opsi dibawah ini :
         Kontrak.findAll(function (data) {
             showTable(data)
             rl.question('masukkan ID Kontrak : ', async (kode) => {
-                if (await Kontrak.cariKontrak(kode)) {
+                let data = await Kontrak.cariKontrak(kode)
+                if (data) {
                     Kontrak.delete(kode)
                     console.log('Kontrak berhasil dihapus')
                     KontrakController.menu()
@@ -140,7 +141,7 @@ silahkan pilih opsi dibawah ini :
                         garis()
                         rl.question('Tulis nilai yang baru : ', async (nilai) => {
                             garis()
-                            if (await Kontrak.cariKontrak(nilai)) {
+                            if (await Kontrak.cariNilai(nilai)) {
                                 Kontrak.update(nilai, id_kontrak, nim)
                                 console.log('nilai telah diupdate')
                                 Kontrak.findAll(function (data) {

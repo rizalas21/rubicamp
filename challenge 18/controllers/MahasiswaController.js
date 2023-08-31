@@ -4,6 +4,8 @@ import { menuUtama } from '../university.js' //rl pindah ke views JurusanViews.j
 import { findResult, mahasiswaTable } from "../views/MahasiswaViews.js"
 import { garis } from '../university.js'
 import { rl } from '../connect.js'
+import { showTable } from "../views/JurusanViews.js"
+import Jurusan from "../models/Jurusan.js"
 
 export default class MahasiswaController {
 
@@ -69,33 +71,41 @@ silahkan pilih opsi dibawah ini :
     }
 
     static async tambah() {
-        rl.question('NIM Mahasiswa : ', async (NIM) => {
-            rl.question('Nama Mahasiswa : ', async (nama) => {
-                rl.question('Tanggal Lahir : ', async (ttl) => {
-                    rl.question('Alamat : ', async (alamat) => {
-                        rl.question('ID Jurusan : ', async (idjurusan) => {
-                            if (await Mahasiswa.cariId(NIM)) {
-                                console.log('\n Gagal menambahkan Mahasiswa, Mahasiswa telah terdaftar');
-                                MahasiswaController.menu()
-                            } else {
-                                Mahasiswa.create(NIM, nama, ttl, alamat, idjurusan, function () {
-                                    console.log('Mahasiswa telah ditambahkan')
-                                    MahasiswaController.daftar()
+        Mahasiswa.findAll(function (data) {
+            mahasiswaTable(data)
+            rl.question('NIM : ', async (NIM) => {
+                rl.question('Nama : ', async (nama) => {
+                    rl.question('Tanggal Lahir : ', async (ttl) => {
+                        rl.question('Alamat : ', async (alamat) => {
+                            Jurusan.find(function (data) {
+                                showTable(data)
+                                rl.question('ID Jurusan : ', async (idjurusan) => {
+                                    if (await Mahasiswa.cariId(NIM)) {
+                                        console.log('\n Gagal menambahkan Mahasiswa, Mahasiswa telah terdaftar');
+                                        MahasiswaController.menu()
+                                    } else {
+                                        Mahasiswa.create(NIM, nama, ttl, alamat, idjurusan, function () {
+                                            console.log('Mahasiswa telah ditambahkan')
+                                            MahasiswaController.daftar()
+                                        })
+                                    }
                                 })
-                            }
+                            })
+
                         })
                     })
                 })
             })
+
         })
     }
 
     static async hapus() {
-        rl.question('Kode Mahasiswa : ', async (kode) => {
+        rl.question('Masukkan NIM Mahasiswa : ', async (kode) => {
             if (await Mahasiswa.cariId(kode)) {
                 Mahasiswa.delete(kode)
-                console.log('Mahasiswa berhasil dihapus')
-                MahasiswaController.daftar()
+                console.log(`Data Mahasiswa ${kode}, telah dihapus`)
+                MahasiswaController.menu()
             } else {
                 Mahasiswa.delete(kode, function () {
                     console.log('Mahasiswa gagal dihapus, silahkan coba lagi!')

@@ -5,6 +5,11 @@ import Login from '../models/Login.js'
 import { loginViews } from '../views/LoginViews.js'
 
 export default class LoginController {
+
+    static in() {
+        LoginController.login()
+    }
+
     static login() {
         rl.question('username : ', (username) => {
             Login.cekUsername(username, function (data) {
