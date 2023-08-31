@@ -65,8 +65,8 @@ silahkan pilih opsi dibawah ini :
             tablekumplit(data)
             rl.question('Masukkan NIM Mahasiswa : ', async (nim) => {
                 const kontrak = await Kontrak.cariNim(nim);
-                console.log(`Daftar Kontrak Mahasiswa Dengan NIM ${nim} adalah : `)
                 if (kontrak) {
+                    console.log(`Daftar Kontrak Mahasiswa Dengan NIM ${nim} adalah : `)
                     kontrakTable(kontrak)
                     KontrakController.menu()
                 } else {
@@ -83,13 +83,14 @@ silahkan pilih opsi dibawah ini :
         Kontrak.kumplit(function (data) {
             tablekumplit(data)
             rl.question('masukkan NIM : ', async (nim) => {
+                var cari = Kontrak.cariNim(nim)
                 Kontrak.matkul(function (data) {
                     tableMatkul(data)
                     rl.question('Masukkan Kode Mata Kuliah: ', async (id_mk) => {
                         Kontrak.dosen(function (data) {
                             tableDosen(data)
                             rl.question('masukkan NIP Dosen : ', async (nip) => {
-                                if (await nim) {
+                                if (await cari) {
                                     Kontrak.create(nim, id_mk, nip, function () {
                                         console.log('Kontrak telah ditambahkan');
                                         Kontrak.findAll(function (data) {

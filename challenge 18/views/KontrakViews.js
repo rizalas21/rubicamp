@@ -35,7 +35,7 @@ export function tablekumplit(data) {
     });
     data.forEach(item => {
         table.push(
-            [item.nim, item.nama, item.tanggal_lahir, item.alamat, item.id_jurusan, item.nama_jurusan]);
+            [item.nim, item.nama, item.tanggal_lahir, item.alamat, item.id_jurusan, item.nama_jurusan? item.nama_jurusan: '']);
 
     });
 

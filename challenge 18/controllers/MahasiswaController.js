@@ -44,7 +44,7 @@ silahkan pilih opsi dibawah ini :
 
                 default:
                     console.log('opsi yang anda pilih tidak tersedia')
-                    JurusanController.menu()
+                    MahasiswaController.menu()
                     break;
             }
         })
@@ -107,10 +107,8 @@ silahkan pilih opsi dibawah ini :
                 console.log(`Data Mahasiswa ${kode}, telah dihapus`)
                 MahasiswaController.menu()
             } else {
-                Mahasiswa.delete(kode, function () {
                     console.log('Mahasiswa gagal dihapus, silahkan coba lagi!')
                     MahasiswaController.menu()
-                })
             }
         })
     }

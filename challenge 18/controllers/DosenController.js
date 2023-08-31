@@ -93,6 +93,7 @@ silahkan pilih opsi dibawah ini :
                 DosenController.daftar()
             } else {
                 console.log('Dosen gagal dihapus, Silahkan coba lagi!')
+                DosenController.menu()
             }
         })
     }

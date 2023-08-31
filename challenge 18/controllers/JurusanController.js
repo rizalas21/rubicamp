@@ -93,10 +93,8 @@ silahkan pilih opsi dibawah ini :
                     console.log('Jurusan berhasil dihapus')
                     JurusanController.menu(``)
                 } else {
-                    Jurusan.delete(kode, function(){
                         console.log('Jurusan gagal dihapus, silahkan coba lagi!')
                         JurusanController.menu()
-                    })
                 }
             })
         }

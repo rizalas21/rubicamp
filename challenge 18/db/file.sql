@@ -20,8 +20,15 @@
             FOREIGN KEY(id_jurusan) REFERENCES jurusan(id_jurusan)
         );
 
--- INSERT INTO mahasiswa(nim, nama, tanggal_lahir, alamat, id_jurusan) VALUES
--- ('2022070001', 'Rizal', '2005-04-13', 'Sumedang', 'J03');
+    
+
+INSERT INTO mahasiswa(nim, nama, tanggal_lahir, alamat, id_jurusan) VALUES
+('2022070001', 'Rizal', '2005-04-13', 'Sumedang', 'J03'),
+('2022070002', 'thoriq', '2009-11-11', 'Sumedang', 'J03'),
+('2022070003', 'Bima', '2019-11-02', 'Sumedang', 'J08'),
+('2022070004', 'iqbal', '2009-9-09', 'Sumedang', 'J02'),
+('2022070005', 'El', '2021-07-07', 'Sumedang', 'J01'),
+('2022070009', 'NINI', '1945-08-17', 'Sumedang', 'J12');
 --     -- tampilkan seluruh data mahasiswa dan jurusannya 
 -- SELECT mahasiswa.*, jurusan.nama_jurusan FROM jurusan
 -- INNER JOIN mahasiswa ON jurusan.id_jurusan = mahasiswa.id_jurusan;

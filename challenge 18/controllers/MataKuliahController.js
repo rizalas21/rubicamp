@@ -94,7 +94,7 @@ silahkan pilih opsi dibawah ini :
                 MataKuliahController.daftar()
             } else {
                     console.log('Mata Kuliah gagal dihapus, Silahkan coba lagi!')
-                    MahasiswaController.menu()
+                    MataKuliahController.menu()
             }
         })
     }
