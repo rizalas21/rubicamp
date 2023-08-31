@@ -94,7 +94,11 @@ if(!command || command === 'help'){
 
     else if(command.toLowerCase() === 'tag') {
         console.log(`"Tag ${process.argv.slice(4)}" telah ditambahkan ke dalam '${obj[obj.findIndex(x => x.ID == id)].title}'`)
-        obj[hapus].tag = process.argv.slice(4);
+        for(let x of process.argv.slice(4)){
+            if(!obj[id - 1].tag.includes(x)) {
+                obj[id - 1].tag.push(x)
+            }
+        }
         fs.writeFileSync("./toDo.json", JSON.stringify(obj), "utf-8")
 
     }else if(command.toLowerCase().startsWith(`filter:${command.slice(7)}`)) {
